@@ -30,6 +30,8 @@ public class fragment_resto_description extends Fragment {
     private String mParam2;
 
     private String namaResto;
+    private String placeResto;
+    private String coordsResto;
 
     public fragment_resto_description() {
         // Required empty public constructor
@@ -67,11 +69,17 @@ public class fragment_resto_description extends Fragment {
         if (getArguments() != null) {
             if (getArguments() != null) {
                 namaResto = getArguments().getString("namaResto");
+                placeResto = getArguments().getString("placeResto");
+                coordsResto = getArguments().getString("coordsResto");
             }
         }
 
         final TextView tv_namaResto = view.findViewById(R.id.tv_namaResto);
+        final TextView tv_lokasiResto = view.findViewById(R.id.tv_lokasiResto);
+        final TextView tv_koordinatResto = view.findViewById(R.id.tv_koordinatResto);
         tv_namaResto.setText(namaResto);
+        tv_lokasiResto.setText(placeResto);
+        tv_koordinatResto.setText(coordsResto);
     }
 
     @Override
@@ -81,10 +89,12 @@ public class fragment_resto_description extends Fragment {
         return inflater.inflate(R.layout.fragment_resto_description, container, false);
     }
 
-    public static fragment_resto_description newInstance(String namaResto) {
+    public static fragment_resto_description newInstance(String namaResto, String placeResto, String coordsResto) {
         fragment_resto_description fragment = new fragment_resto_description();
         Bundle args = new Bundle();
         args.putString("namaResto", namaResto);
+        args.putString("placeResto", placeResto);
+        args.putString("coordsResto", coordsResto);
         fragment.setArguments(args);
         return fragment;
     }
