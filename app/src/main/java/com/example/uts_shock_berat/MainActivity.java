@@ -1,5 +1,6 @@
 package com.example.uts_shock_berat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ListView listview_resto;
     private Button button;
@@ -35,11 +36,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.i("i: ", String.valueOf(i));
                 Log.i("itemName: ", String.valueOf(listTest[i]));
+
                 if (!isFragmentDisplayed){
                     displayFragment(String.valueOf(listTest[i]));
+                    closeMapFragment();
                 }
                 else {
                     closeFragment();
+                    displayMapFragment();
                 }
             }
         });
@@ -61,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
         isFragmentDisplayed = true;
     }
 
+    private void displayMapFragment() {
+        fragment_map simple_fragment = com.example.uts_shock_berat.fragment_map.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, simple_fragment).commit();
+    }
+
     private void closeFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragment_resto_description simple_fragment= (com.example.uts_shock_berat.fragment_resto_description) fragmentManager.findFragmentById(R.id.fragment_container);
@@ -69,5 +80,14 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.remove(simple_fragment).commit();
         }
         isFragmentDisplayed = false;
+    }
+
+    private void closeMapFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragment_map simple_fragment= (com.example.uts_shock_berat.fragment_map) fragmentManager.findFragmentById(R.id.fragment_container);
+        if (simple_fragment != null){
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(simple_fragment).commit();
+        }
     }
 }
