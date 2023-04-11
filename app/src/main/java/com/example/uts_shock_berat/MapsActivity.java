@@ -1,7 +1,11 @@
 package com.example.uts_shock_berat;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
@@ -63,5 +68,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng marker = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(marker).title(namaResto));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, 14));
+        enableMyLocation();
+    }
+
+    private void enableMyLocation(){
+        // Check if the app has permission to access the device's location data
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Enable the "My Location" feature on the map
+            mMap.setMyLocationEnabled(true);
+        } else {
+            // Request permission from the user to access the device's location data
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+        }
     }
 }
