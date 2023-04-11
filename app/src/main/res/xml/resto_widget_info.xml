@@ -1,0 +1,33 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="100dp"
+    android:minHeight="100dp"
+    android:updatePeriodMillis="86400000"
+    android:initialLayout="@layout/resto_widget"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen">
+
+    <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+    <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+    <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+
+    <receiver android:name=".ExampleAppWidgetProvider">
+        <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="android.appwidget.action.APPWIDGET_ENABLED" />
+            <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
+        </intent-filter>
+        <meta-data android:name="android.appwidget.provider"
+            android:resource="@xml/resto_widget_info" />
+    </receiver>
+
+    <appwidget-feature
+        android:name="android.software.live_wallpaper"
+        android:required="true"
+        android:glEsVersion="0x00020000"
+        android:resizeMode="horizontal|vertical"
+        android:updatePeriodMillis="0"
+        android:initialLayout="@layout/resto_widget"
+        android:widgetCategory="home_screen">
+    </appwidget-feature>
+
+</appwidget-provider>

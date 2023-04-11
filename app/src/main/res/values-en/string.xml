@@ -16,4 +16,9 @@
     <string name="promo_get">Get your Shake-Shake Promo!</string>
     <string name="promo_desc">10% cashback on transactions at your favorite restaurant for a month by subscribing to RestoSaver Premium</string>
     <string name="promo_subscribe">Subscribe</string>
+    <string name="update_button">Update</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>

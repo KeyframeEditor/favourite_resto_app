@@ -28,13 +28,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private ListView listview_resto;
     private boolean isFragmentDisplayed = false;
     String listTest[] = {"canon","ballz","in","da","jaw"};
-    List<Map<String, Object>> itemList = new ArrayList<>();
+    static List<Map<String, Object>> itemList = new ArrayList<>();
 
     //for sensors
     private SensorManager sensorManager;
@@ -235,5 +236,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void setShakeConfirmation(boolean value) {
         shakeConfirmation = value;
+    }
+
+    public static String getLatestResto() {
+        Random indexResto = new Random();
+        int randomIndexResto = indexResto.nextInt(6); // generate random number between 0-5
+        String myVariable = String.valueOf(itemList.get(randomIndexResto).get("name"));
+        return myVariable;
     }
 }

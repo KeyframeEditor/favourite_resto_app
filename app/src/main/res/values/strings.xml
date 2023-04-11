@@ -15,4 +15,9 @@
     <string name="promo_get">Dapatkan Promo Shake-Shake mu!</string>
     <string name="promo_desc">Cashback 10% transaksi di restoran favoritmu selama sebulan dengan berlangganan RestoSaver Premium</string>
     <string name="promo_subscribe">Berlangganan</string>
+    <string name="update_button">Perbarui</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
