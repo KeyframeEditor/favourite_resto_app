@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private ListView listview_resto;
     private boolean isFragmentDisplayed = false;
-    String listTest[] = {"canon","ballz","in","da","jaw"};
     static List<Map<String, Object>> itemList = new ArrayList<>();
 
     //for sensors
@@ -53,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         addRestoData();
 
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (this, R.layout.activity_listview_resto, R.id.listview_textview, listTest);
-//        listview_resto.setAdapter(arrayAdapter);
         RestoListAdapter restoListAdapter = new RestoListAdapter(this, R.layout.activity_listview_resto, itemList);
         listview_resto.setAdapter(restoListAdapter);
 

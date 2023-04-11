@@ -14,7 +14,6 @@ import android.widget.RemoteViews;
 public class RestoWidget extends AppWidgetProvider {
 
     public static final String ACTION_UPDATE_CLICK = "com.example.uts_shock_berat.ACTION_UPDATE_CLICK";
-//    private static final String ACTION_UPDATE_CLICK = "ACTION_UPDATE_CLICK";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
