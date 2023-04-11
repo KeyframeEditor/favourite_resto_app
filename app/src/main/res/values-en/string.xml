@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">uts_shock_berat</string>
-    <string name="title_activity_maps">por vafor en</string>
+    <string name="title_activity_maps">Restaurant Saver</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tester">English Language</string>
@@ -10,4 +10,7 @@
     <string name="restoLocation">Location</string>
     <string name="restoCoords">Coordinates</string>
     <string name="fullscreen">Fullscreen</string>
+    <string name="description">Description</string>
+    <string name="restoList">List</string>
+
 </resources>

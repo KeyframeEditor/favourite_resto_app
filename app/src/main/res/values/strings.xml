@@ -9,4 +9,6 @@
     <string name="restoLocation">Lokasi</string>
     <string name="restoCoords">koordinat</string>
     <string name="fullscreen">Layar Penuh</string>
+    <string name="description">Deskripsi Restoran</string>
+    <string name="restoList">Daftar Resto</string>
 </resources>
