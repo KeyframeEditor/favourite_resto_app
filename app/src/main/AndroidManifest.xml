@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- request aproximate gps location from wifi/cellular data -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- request precise gps location from wifi/cellular data -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- request aproximate gps location from wifi/cellular data -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- request accelerometer sensor to be used on the app-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SENSOR" />
 
     <application
         android:allowBackup="true"

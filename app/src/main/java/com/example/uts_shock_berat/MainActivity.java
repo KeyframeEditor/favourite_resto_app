@@ -5,7 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -22,12 +29,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private ListView listview_resto;
     private boolean isFragmentDisplayed = false;
     String listTest[] = {"canon","ballz","in","da","jaw"};
     List<Map<String, Object>> itemList = new ArrayList<>();
+
+    //for sensors
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private static final int SHAKE_THRESHOLD = 25;
+    private long lastUpdateTime;
+    private boolean shakeConfirmation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +56,6 @@ public class MainActivity extends AppCompatActivity{
 //        listview_resto.setAdapter(arrayAdapter);
         RestoListAdapter restoListAdapter = new RestoListAdapter(this, R.layout.activity_listview_resto, itemList);
         listview_resto.setAdapter(restoListAdapter);
-
 
         listview_resto.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,6 +83,10 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        lastUpdateTime = System.currentTimeMillis();
     }
 
     private void displayFragment(String namaResto, String placeResto, String coordsResto) {
@@ -161,5 +178,62 @@ public class MainActivity extends AppCompatActivity{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_item, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - lastUpdateTime) > 100) {
+            long diffTime = (currentTime - lastUpdateTime);
+            lastUpdateTime = currentTime;
+
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            float acceleration = (float) Math.sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH;
+            if (acceleration > SHAKE_THRESHOLD && shakeConfirmation == false) {
+                setShakeConfirmation(true);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Dapatkan Promo Shake-Shake mu!");
+                builder.setMessage("cashback 10% transaksi di restoran favoritmu selama sebulan dengan berlangganan RestoSaver Premium");
+                builder.setPositiveButton("Berlangganan", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setShakeConfirmation(false);
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        setShakeConfirmation(false);
+                    }
+                }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        setShakeConfirmation(false);
+                    }
+                });
+                builder.show();
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    public void setShakeConfirmation(boolean value) {
+        shakeConfirmation = value;
     }
 }
