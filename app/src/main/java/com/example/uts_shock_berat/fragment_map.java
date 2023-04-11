@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class fragment_map extends Fragment {
 
+    private static float restoLongitude;
+    private static float restoLatitude;
+
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -29,11 +33,14 @@ public class fragment_map extends Fragment {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
+
+
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng pin = new LatLng(getArguments().getFloat("longitude"), getArguments().getFloat("latitude"));
+            googleMap.addMarker(new MarkerOptions().position(pin).title("Marker in Sydney"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pin, 14));
+            Log.d("MAP ON LONG: ", String.valueOf(getArguments().getFloat("latitude")));
         }
     };
 
@@ -53,10 +60,24 @@ public class fragment_map extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+        // grab data
+//        if (getArguments() != null) {
+//            if (getArguments() != null) {
+//                namaResto = getArguments().getString("namaResto");
+//                placeResto = getArguments().getString("placeResto");
+//                coordsResto = getArguments().getString("coordsResto");
+//            }
+//        }
     }
 
-    public static fragment_map newInstance() {
+    public static fragment_map newInstance(float longitude, float latitude) {
         fragment_map fragment = new fragment_map();
+        Bundle args = new Bundle();
+        args.putFloat("longitude", longitude);
+        args.putFloat("latitude", latitude);
+//        restoLongitude = longitude;
+//        restoLatitude = latitude;
+        fragment.setArguments(args);
         return fragment;
     }
 }

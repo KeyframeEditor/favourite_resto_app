@@ -7,12 +7,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.view.MenuInflater;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
                 }
                 else {
                     closeFragment();
-                    displayMapFragment();
+                    displayMapFragment(longitudeResto, latitudeResto);
                 }
             }
         });
@@ -89,8 +93,8 @@ public class MainActivity extends AppCompatActivity{
         isFragmentDisplayed = true;
     }
 
-    private void displayMapFragment() {
-        fragment_map simple_fragment = com.example.uts_shock_berat.fragment_map.newInstance();
+    private void displayMapFragment(float longitude, float latitude) {
+        fragment_map simple_fragment = com.example.uts_shock_berat.fragment_map.newInstance(longitude, latitude);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, simple_fragment).commit();
@@ -122,5 +126,24 @@ public class MainActivity extends AppCompatActivity{
         item1.put("longitude", -7.7498738753937175);
         item1.put("latitude", 110.39572713200663);
         itemList.add(item1);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.changeLanguage:
+                Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_item, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }
