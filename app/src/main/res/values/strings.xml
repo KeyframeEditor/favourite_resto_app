@@ -8,4 +8,5 @@
     <string name="restoName">Nama Resto</string>
     <string name="restoLocation">Lokasi</string>
     <string name="restoCoords">koordinat</string>
+    <string name="fullscreen">Layar Penuh</string>
 </resources>

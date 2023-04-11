@@ -13,12 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.view.MenuInflater;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +25,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity{
 
     private ListView listview_resto;
-    private Button button;
     private boolean isFragmentDisplayed = false;
     String listTest[] = {"canon","ballz","in","da","jaw"};
     List<Map<String, Object>> itemList = new ArrayList<>();
@@ -39,7 +35,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         listview_resto = findViewById(R.id.listview_resto);
-        button = findViewById(R.id.button);
 
         addRestoData();
 
@@ -71,16 +66,8 @@ public class MainActivity extends AppCompatActivity{
                 }
                 else {
                     closeFragment();
-                    displayMapFragment(longitudeResto, latitudeResto);
+                    displayMapFragment(longitudeResto, latitudeResto, namaResto);
                 }
-            }
-        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -93,8 +80,8 @@ public class MainActivity extends AppCompatActivity{
         isFragmentDisplayed = true;
     }
 
-    private void displayMapFragment(float longitude, float latitude) {
-        fragment_map simple_fragment = com.example.uts_shock_berat.fragment_map.newInstance(longitude, latitude);
+    private void displayMapFragment(float longitude, float latitude, String namaResto) {
+        fragment_map simple_fragment = com.example.uts_shock_berat.fragment_map.newInstance(longitude, latitude, namaResto);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, simple_fragment).commit();

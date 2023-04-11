@@ -9,4 +9,5 @@
     <string name="restoName">Restaurant</string>
     <string name="restoLocation">Location</string>
     <string name="restoCoords">Coordinates</string>
+    <string name="fullscreen">Fullscreen</string>
 </resources>
