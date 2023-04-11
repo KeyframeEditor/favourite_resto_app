@@ -1,8 +1,11 @@
 package com.example.uts_shock_berat;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 /**
@@ -10,42 +13,44 @@ import android.widget.RemoteViews;
  */
 public class RestoWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
-        CharSequence widgetText = "TEST";
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.resto_widget);
-        views.setTextViewText(R.id.textview_widget, widgetText);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
+    public static final String ACTION_UPDATE_CLICK = "com.example.uts_shock_berat.ACTION_UPDATE_CLICK";
+//    private static final String ACTION_UPDATE_CLICK = "ACTION_UPDATE_CLICK";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-//            updateAppWidget(context, appWidgetManager, appWidgetId);
-            // Get the widget layout
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.resto_widget);
-
-            // Get the variable from the main activity and set it in the TextView
             String latestResto = MainActivity.getLatestResto();
-            views.setTextViewText(R.id.textview_widget, latestResto);
 
-            // Update the widget
+            // set textview and click listener on the button
+            views.setTextViewText(R.id.textview_widget, latestResto);
+            views.setOnClickPendingIntent(R.id.button_update, getUpdateIntent(context, appWidgetId));
+
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
 
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
+    private PendingIntent getUpdateIntent(Context context, int appWidgetId) {
+        Intent intent = new Intent(context, RestoWidget.class);
+        intent.setAction(ACTION_UPDATE_CLICK);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        // Add the FLAG_IMMUTABLE flag to the PendingIntent
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
+
     @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if (ACTION_UPDATE_CLICK.equals(intent.getAction())) {
+            // Update the text view with a new random value
+            String latestResto = MainActivity.getLatestResto();
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.resto_widget);
+            views.setTextViewText(R.id.textview_widget, latestResto);
+            ComponentName componentName = new ComponentName(context, RestoWidget.class);
+            AppWidgetManager.getInstance(context).updateAppWidget(componentName, views);
+        }
     }
+
+
 }

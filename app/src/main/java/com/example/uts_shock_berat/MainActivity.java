@@ -240,8 +240,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public static String getLatestResto() {
         Random indexResto = new Random();
-        int randomIndexResto = indexResto.nextInt(6); // generate random number between 0-5
-        String myVariable = String.valueOf(itemList.get(randomIndexResto).get("name"));
-        return myVariable;
+        int randomIndexResto = indexResto.nextInt(itemList.size());
+        String index = String.valueOf(itemList.get(randomIndexResto).get("name"));
+        return index;
     }
 }

@@ -30,7 +30,7 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/example_widget_button"
+        android:id="@+id/button_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/update_button"/>
