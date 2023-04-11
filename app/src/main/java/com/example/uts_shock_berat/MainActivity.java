@@ -195,9 +195,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             if (acceleration > SHAKE_THRESHOLD && shakeConfirmation == false) {
                 setShakeConfirmation(true);
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Dapatkan Promo Shake-Shake mu!");
-                builder.setMessage("cashback 10% transaksi di restoran favoritmu selama sebulan dengan berlangganan RestoSaver Premium");
-                builder.setPositiveButton("Berlangganan", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.promo_get));
+                builder.setMessage(getString(R.string.promo_desc));
+                builder.setPositiveButton(getString(R.string.promo_subscribe), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         setShakeConfirmation(false);

@@ -11,4 +11,8 @@
     <string name="fullscreen">Layar Penuh</string>
     <string name="description">Deskripsi Restoran</string>
     <string name="restoList">Daftar Resto</string>
+
+    <string name="promo_get">Dapatkan Promo Shake-Shake mu!</string>
+    <string name="promo_desc">Cashback 10% transaksi di restoran favoritmu selama sebulan dengan berlangganan RestoSaver Premium</string>
+    <string name="promo_subscribe">Berlangganan</string>
 </resources>

@@ -13,4 +13,7 @@
     <string name="description">Description</string>
     <string name="restoList">List</string>
 
+    <string name="promo_get">Get your Shake-Shake Promo!</string>
+    <string name="promo_desc">10% cashback on transactions at your favorite restaurant for a month by subscribing to RestoSaver Premium</string>
+    <string name="promo_subscribe">Subscribe</string>
 </resources>
