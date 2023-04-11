@@ -37,7 +37,7 @@ public class fragment_map extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng pin = new LatLng(getArguments().getFloat("longitude"), getArguments().getFloat("latitude"));
+            LatLng pin = new LatLng(getArguments().getFloat("latitude"), getArguments().getFloat("longitude"));
             googleMap.addMarker(new MarkerOptions().position(pin).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pin, 14));
             Log.d("MAP ON LONG: ", String.valueOf(getArguments().getFloat("latitude")));

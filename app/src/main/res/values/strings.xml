@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tester">Bahasa Indonesia</string>
     <string name="changeLanguage">Ganti Bahasa</string>
+    <string name="restoName">Nama Resto</string>
+    <string name="restoLocation">Lokasi</string>
+    <string name="restoCoords">koordinat</string>
 </resources>

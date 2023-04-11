@@ -121,11 +121,40 @@ public class MainActivity extends AppCompatActivity{
 
     private void addRestoData(){
         Map<String, Object> item1 = new HashMap<>();
-        item1.put("name", "Warung Jepun ygy");
-        item1.put("place", "ConCat region");
-        item1.put("longitude", -7.7498738753937175);
-        item1.put("latitude", 110.39572713200663);
+        item1.put("name", "Warung Jepun");
+        item1.put("place", "Jalan Kaliurang KM 5.5, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281");
+        item1.put("latitude", -7.743837);
+        item1.put("longitude", 110.383864);
         itemList.add(item1);
+
+        Map<String, Object> item2 = new HashMap<>();
+        item2.put("name", "Gudeg Bu Tjitro");
+        item2.put("place", "Jl. Janti No. 165, Karang Jambe, Kec. Umbulharjo, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55166");
+        item2.put("latitude", -7.813390);
+        item2.put("longitude", 110.383911);
+        itemList.add(item2);
+
+        Map<String, Object> item3 = new HashMap<>();
+        item3.put("name", "Bakmi Jawa Pak Pele");
+        item3.put("place", "Jalan Bantul No.61, Gowongan, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55231");
+        item3.put("latitude", -7.799746);
+        item3.put("longitude", 110.372590);
+        itemList.add(item3);
+
+        Map<String, Object> item4 = new HashMap<>();
+        item4.put("name", "Soto Ayam Pak Pangat");
+        item4.put("place", "Jl. Raya Solo KM. 11 No.105, Kec. Ngemplak, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55584");
+        item4.put("latitude", -7.747548);
+        item4.put("longitude", 110.414444);
+        itemList.add(item4);
+
+        Map<String, Object> item5 = new HashMap<>();
+        item5.put("name", "Sate Klathak Pak Pong");
+        item5.put("place", "Jl. Kaliurang KM 8, Krawitan, Hargobinangun, Kec. Pakem, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55582");
+        item5.put("latitude", -7.668314);
+        item5.put("longitude", 110.393148);
+        itemList.add(item5);
+
     }
 
     @Override

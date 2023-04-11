@@ -6,4 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tester">English Language</string>
     <string name="changeLanguage">Change Language</string>
+    <string name="restoName">Restaurant</string>
+    <string name="restoLocation">Location</string>
+    <string name="restoCoords">Coordinates</string>
 </resources>
